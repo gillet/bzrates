@@ -27,6 +27,7 @@ Contact: Alexandre Gillet-Markowska - alexandre(dot)gillet(at)yahoo(dot)fr
 from django.forms import ModelForm
 from django.shortcuts import render_to_response, HttpResponseRedirect, HttpResponse
 from django import forms
+from django.db import models
 from django.template import RequestContext
 import re
 import numpy as np
@@ -59,7 +60,6 @@ class MutForm(forms.Form):
     b = forms.DecimalField(help_text="Mutant fitness relatively to wild type", label="b", widget=forms.NumberInput(attrs={'class': 'narrow-select'}), required=False)
     #fluctuation = NMutField(help_text="Nmutant | Nplated cells", widget=forms.Textarea(attrs={'class': 'dataFluc', 'required': ""}), label="")
     fluctuation = forms.CharField(help_text="Nmutant | Nplated cells", widget=forms.Textarea(attrs={'class': 'dataFluc', 'required': ""}), label="")
-
 
 
 #______________________________________________________________________________
@@ -596,6 +596,7 @@ def contact(request):
             else:
                 b = float(b)
                 res = CalculateAllLCFDiff(Nmut , N0, Np, b, z)
+            #After this  you can run you own estimator
 
             return render_to_response('contact.html', { 'mut_form': mut_form, 'res': res}, context_instance=RequestContext(request))
 
@@ -603,6 +604,7 @@ def contact(request):
     else: #if it is a GET
         mut_form = MutForm() # An unbound form
         res = 'vide'
+
     return render_to_response('contact.html', { 'mut_form': mut_form, 'res': res}, context_instance=RequestContext(request))
 
 
