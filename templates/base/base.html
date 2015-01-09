@@ -1,0 +1,79 @@
+<!--
+==================================================================================
+bz-rates: a web-tool to accurately estimate mutation rates from fluctuation assays
+==================================================================================
+Copyright (C) 2015 Alexandre Gillet-Markowska
+
+This file is part of bz-rates.
+
+bz-rates is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+bz-rates is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with bz-rates.  If not, see <http://www.gnu.org/licenses/>.
+==================================================================================
+Contact: Alexandre Gillet-Markowska - alexandre(dot)gillet(at)yahoo(dot)fr
+==================================================================================
+-->
+
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+    <link href="{{ STATIC_URL }}css/main.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML&imageFont:null"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "AMS"} } });
+    </script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.11.2.min.js"></script>
+    <!--<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}/ckeditor/static/ckeditor/ckeditor/ckeditor.js" ></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}/ckeditor/static/ckeditor/ckeditor-init.js" ></script> -->
+    {% block javascript %}{% endblock %}
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="logo"></div>
+        <br />
+        <div class="clr"></div>
+    </div>
+
+    <div class="abstract">
+        {% block abstract %}
+        {% endblock %}
+    </div>
+
+
+
+    <div class="wrap">
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+
+    <div class="implementation">
+        <div class="implementationTxt">
+            {% block implementation %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <table class='bottomtab' width='100%'><tr><td>
+        © 2015 UPMC - CNRS </br>
+        Need help? Please contact alexandre(dot)gillet(dash)markowska(at)upmc(dot)fr if you have any questions, comments or concerns.</br>
+        Developed at the <a href="http://www.lcqb.upmc.fr" target="_blank"  class="footer">LCQB-UPMC</a> in the <a href="http://www.lcqb.upmc.fr/BiG" target="_blank" class="footer">Fischer Lab</a>.</br>
+    </td></tr></table>
+
+</body>
+</html>

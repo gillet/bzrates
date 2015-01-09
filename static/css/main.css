@@ -1,0 +1,314 @@
+/*
+==================================================================================
+bz-rates: a web-tool to accurately estimate mutation rates from fluctuation assays
+==================================================================================
+Copyright (C) 2015 Alexandre Gillet-Markowska
+
+This file is part of bz-rates.
+
+bz-rates is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+bz-rates is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with bz-rates.  If not, see <http://www.gnu.org/licenses/>.
+==================================================================================
+Contact: Alexandre Gillet-Markowska - alexandre(dot)gillet(at)yahoo(dot)fr
+==================================================================================
+*/
+
+
+body {
+    background-color: #ffffff;
+    padding: 10px;
+    margin:0;
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    text-align: center;
+
+}
+
+.wrap {
+    width: 980px;
+    margin: 0 auto;
+    padding-bottom: 5px;
+    margin-top: 15px;
+    background-color: #D1D1D1;
+    border-style: solid;
+    border-color: black;
+    color: black;
+    vertical-align: middle;
+    text-align: left;
+    font-size: 15px;
+}
+
+.header {
+    width: 980px;
+    margin: 0 auto;
+    height: 63px;
+    background-color: #D1D1D1;
+    border-style: solid;
+    border-color: black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.abstract {
+    width: 950px;
+    margin: 0 auto;
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #D1D1D1;
+    border-style: solid;
+    border-color: black;
+    color: black;
+    vertical-align: middle;
+    text-align: left;
+    font-size: 14px;
+}
+
+.ulParams {
+    display: block;
+    list-style-type: disc;
+    margin-left: 0;
+    margin: 1em 0 1px;
+    padding-left: 40px;
+}
+
+.parameters {
+    width: 950px;
+    margin: 0 auto;
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #D1D1D1;
+    border-style: solid;
+    border-color: black;
+    color: black;
+    vertical-align: middle;
+    text-align: left;
+    font-size: 14px;
+}
+
+
+.inputTab {
+    padding-left: 10px;
+    padding-top: 10px;
+    vertical-align: top;
+    margin: 0 auto;
+    margin-top: 0px;
+}
+.inputTab td {
+    vertical-align: top;
+}
+
+.tabButtons {
+    line-height: 35px;
+    vertical-align: central;
+    margin: 0px;
+}
+
+
+.formTab {
+    vertical-align: top;
+    margin-top: 2px;
+    padding-top: 0px;
+    padding-left: 10px;
+}
+
+.formTab td{
+    height: 52px;
+}
+
+.separator{
+    width: 1px;
+    border-right: 3px solid black;
+    padding-left: 25px;
+}
+
+.tabButtonsCell {
+    width: 450px;
+    height: 35px;
+    padding: 3px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+    background-color: #868686;
+    color: #ffffff;
+    vertical-align: middle;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.helpSize{
+    font-size: 12px;
+}
+.tabButtonsCell2 {
+    width: 457px;
+    height: 174px;
+    padding: 0px;
+    margin: 0px;
+    background-color: #868686;
+    color: #ffffff;
+    vertical-align: middle;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.resTab{
+    margin: 0px;
+    padding-left: 30px;
+}
+
+.resTabCell {
+    width: 200px;
+    height: 35px;
+    padding: 0px;
+    margin: 0px 0px 10px;
+    vertical-align: middle;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.resTabCell2 {
+    width: 200px;
+    height: 170px;
+    padding-top: 1px;
+    margin: 0px;
+    vertical-align: middle;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.resTabCell3 {
+    width: 205px;
+    height: 40px;
+    padding: 0px;
+    margin: 1px 0px 7px;
+    background-color: #868686;
+    color: #ffffff;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.resultsTxt{
+    margin-top: 2px;
+    padding-top: 10;
+}
+
+
+
+.narrow-select {
+    height: 40px;
+    width: 165px;
+}
+
+.dataFluc {
+    height: 174px;
+    width: 165px;
+}
+
+.txtArea{
+    height: 285px;
+    width: 205px;
+    background-color: #ffffff;
+}
+
+.runButton {
+    margin-left: 512px;
+}
+
+.progressBar{
+    margin-left: 512px;
+    margin-top: 10px;
+}
+
+#overlay {
+    background-color: black;
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    opacity: 0.7; /* also -moz-opacity, etc. */
+    z-index: 10;
+}
+
+
+.progress{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin:-10px 0 0 -150px;
+    z-index:101;
+    opacity:1.0;
+}
+
+.GIFResize{
+    width: 120%;
+}
+
+.marge {
+    margin-left: 30px;
+}
+
+
+.implementation
+{
+    width: 965px;
+    margin: 0 auto;
+    margin-top: 15px;
+    padding-left: 15px;
+    background-color: #D1D1D1;
+    border-style: solid;
+    border-color: black;
+    color: black;
+    vertical-align: middle;
+    text-align: left;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.implementationTxt{
+    width: 940px;
+    padding-right: 5px;
+}
+
+.clr {
+    clear: both;
+}
+
+.logo {
+    width: 337px;
+    height: 55px;
+    margin: 0 auto;
+    margin-top: 3px;
+    background: url('../images/bz-rates_small.svg');
+}
+
+.bottomtab {
+    width: 985px;
+    margin: 0 auto;
+    margin-top: 15px;
+    background-color: #D1D1D1;
+    border-style: solid;
+    border-color: black;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 12px;
+}
+
+.refTxt{
+    line-height: 17px;
+}
