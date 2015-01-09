@@ -579,10 +579,10 @@ def contact(request):
         mut_form = MutForm(request.POST) # A form bound to the POST data
 
         if mut_form.is_valid(): # All validation rules pass
+            #Parsing the input data from the form
             z = mut_form.cleaned_data['z']
             b = mut_form.cleaned_data['b']
             N0 = mut_form.cleaned_data['N0']
-
             fluctuation = mut_form.cleaned_data['fluctuation']
             fluctuationList = list(chunks(re.findall(r"[\w']+", fluctuation),2))
             f = [[int(x[0]), int(x[1])] for x in fluctuationList]
