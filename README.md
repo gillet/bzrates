@@ -6,10 +6,10 @@ a web-tool to accurately estimate mutation rates from fluctuation assays.
 This application was developed using Django v1.6 and Python2.7
 
 # Running version of bz-rates
-You can access a running version of bz-rates at: www.lcqb.upmc.fr/bz-rates
+You can access a running version of bz-rates at: www.lcqb.upmc.fr/bzrates
 
 # Instructions
-Please refer to www.lcqb.upmc.fr/bz-rates for usage instructions
+Please refer to www.lcqb.upmc.fr/bzrates for usage instructions
 
 # Citation
 bz-rates paper is under submission process
