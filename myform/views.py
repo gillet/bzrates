@@ -27,7 +27,6 @@ Contact: Alexandre Gillet-Markowska - alexandre(dot)gillet(at)yahoo(dot)fr
 from django.forms import ModelForm
 from django.shortcuts import render_to_response, HttpResponseRedirect, HttpResponse
 from django import forms
-from django.db import models
 from django.template import RequestContext
 import re
 import numpy as np
@@ -60,6 +59,7 @@ class MutForm(forms.Form):
     b = forms.DecimalField(help_text="Mutant fitness relatively to wild type", label="b", widget=forms.NumberInput(attrs={'class': 'narrow-select'}), required=False)
     #fluctuation = NMutField(help_text="Nmutant | Nplated cells", widget=forms.Textarea(attrs={'class': 'dataFluc', 'required': ""}), label="")
     fluctuation = forms.CharField(help_text="Nmutant | Nplated cells", widget=forms.Textarea(attrs={'class': 'dataFluc', 'required': ""}), label="")
+
 
 
 #______________________________________________________________________________
@@ -256,10 +256,10 @@ def CalculateAllLCFDiff(Nmut , N0, Np, b, z):
     CLinf , CLsup = CL(Mcorr , corr(m , z) , c)
 
     return ["Maximum Likelihood", \
-            float('{:.2e}'.format(m)), round(M,13), \
-            float('{:.2e}'.format(mcorr)), round(Mcorr,13), \
-            '{:.3e}'.format(round(CLinf,13)) , '{:.3e}'.format(round(CLsup,13)), \
-            '{:.3e}'.format(int(round(Npmoy))) , '{:.3e}'.format(int(Npsd))]
+            float('{0:.2e}'.format(m)), round(M,13), \
+            float('{0:.2e}'.format(mcorr)), round(Mcorr,13), \
+            '{0:.3e}'.format(round(CLinf,13)) , '{0:.3e}'.format(round(CLsup,13)), \
+            '{0:.3e}'.format(int(round(Npmoy))) , '{0:.3e}'.format(int(Npsd))]
 
 def GF(Nmut, N0, Np, z):
     """Compute mutation rates with GF"""
@@ -279,11 +279,11 @@ def GF(Nmut, N0, Np, z):
     rhoinf, rhosup = min(CL['rho'].values()), max(CL['rho'].values())
 
     return ["Generating Function", \
-            float('{:.2e}'.format(m)), round(M,13), \
-            float('{:.2e}'.format(mcorr)), round(Mcorr,13), \
-            '{:.3e}'.format(round(CLinf,13)) , '{:.3e}'.format(round(CLsup,13)), \
+            float('{0:.2e}'.format(m)), round(M,13), \
+            float('{0:.2e}'.format(mcorr)), round(Mcorr,13), \
+            '{0:.3e}'.format(round(CLinf,13)) , '{0:.3e}'.format(round(CLsup,13)), \
             round(rho,3), round(rhoinf,3), round(rhosup,3), \
-            '{:.3e}'.format(int(round(Npmoy))) , '{:.3e}'.format(int(Npsd))]
+            '{0:.3e}'.format(int(round(Npmoy))) , '{0:.3e}'.format(int(Npsd))]
 
 #______________________________________________________________________________
 # """-----------------------------------------------------------------
@@ -579,10 +579,10 @@ def contact(request):
         mut_form = MutForm(request.POST) # A form bound to the POST data
 
         if mut_form.is_valid(): # All validation rules pass
-            #Parsing the input data from the form
             z = mut_form.cleaned_data['z']
             b = mut_form.cleaned_data['b']
             N0 = mut_form.cleaned_data['N0']
+
             fluctuation = mut_form.cleaned_data['fluctuation']
             fluctuationList = list(chunks(re.findall(r"[\w']+", fluctuation),2))
             f = [[int(x[0]), int(x[1])] for x in fluctuationList]
@@ -596,7 +596,6 @@ def contact(request):
             else:
                 b = float(b)
                 res = CalculateAllLCFDiff(Nmut , N0, Np, b, z)
-            #After this  you can run you own estimator
 
             return render_to_response('contact.html', { 'mut_form': mut_form, 'res': res}, context_instance=RequestContext(request))
 
@@ -604,7 +603,6 @@ def contact(request):
     else: #if it is a GET
         mut_form = MutForm() # An unbound form
         res = 'vide'
-
     return render_to_response('contact.html', { 'mut_form': mut_form, 'res': res}, context_instance=RequestContext(request))
 
 

@@ -100,7 +100,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(tempfile.gettempdir(), 'static')
+#STATIC_ROOT = os.path.join(tempfile.gettempdir(), 'static')
+STATIC_ROOT = ''
 #CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 #CKEDITOR_UPLOAD_PATH = "uploads/"
 #CKEDITOR_IMAGE_BACKEND = "pillow"
@@ -113,7 +114,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join('templates'),
-    os.path.join('myform/templates'),
+    os.path.join(BASE_DIR, 'templates'),
+    os.path.join(BASE_DIR, 'myform/templates'),
 )
 

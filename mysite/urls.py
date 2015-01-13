@@ -28,13 +28,15 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+
+from myform import views
+
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 )
 
 
 urlpatterns += patterns('myform.views',
-                        url(r'^$', 'contact', name='contact'),
-                        url(r'^success$', 'success', name='success'),
+                        url(r'^$', views.contact),
                         )
 
