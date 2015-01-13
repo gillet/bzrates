@@ -19,7 +19,14 @@ bz-rates
 
 
 {% block content %}
-        <h3 style="margin-left: 15px">Mutation rate calculator</h3>
+
+    <table class="tabCalculator">
+        <tr>
+            <td><div class="calculator"><div class="calculatorTxt"><b>Mutation rate calculator</b></div></div></td>
+            <td><div class="resTabCell3"><div class="resultsTxt"><b>Results</b></div></div></td>
+        </tr>
+    </table>
+
     <form action="" method="post">{% csrf_token %}
         <table class="inputTab">
             <tbody>
@@ -31,9 +38,13 @@ bz-rates
                             </tr>
                             <tr >
                                 <td><div class="tabButtonsCell3">
-                                    <i><b>b</b></i> : Fitness of mutant / WT cells (0 < b < ∞)
-                                    <br><small>If filled: \(\mu\) is calculated with the Maximum Likelihood method </small>
-                                    <br><small>If left empty: <i>b</i> and \(\mu\) are calculated with the Generating Function</small>
+                                    <div class="tabButtonsCell3Title">
+                                        <i><b>b</b></i> : Fitness of mutant / WT cells (0 < b < ∞)
+                                    </div>
+                                    <div class="tabButtonsCell3Sub">
+                                        <span class="bSub">If filled: <i>μ</i> is calculated with the Maximum Likelihood method
+                                        <br>If left empty: <i>b</i> and <i>μ</i> are calculated with the Generating Function</span>
+                                    </div>
                                 </div>
                                 </td>
                             </tr>
@@ -116,9 +127,6 @@ bz-rates
                     <td class="separator"></td>
                     <td>
                         <table class="resTab">
-                            <tr>
-                                <td><div class="resTabCell3"><div class="resultsTxt"><b>Results</b></div></div></td>
-                            </tr>
                             <tr>
                                 <td><div class="resTabCell2" >
                                     {% if res != "vide" %}
