@@ -18,19 +18,16 @@ bz-rates paper is under submission process
 You can add an estimator by modifying the view.py file and the contact.html file.
 
 ##view.py file
-To ass your own estimator, 2 modification is required in the bzrates_v1/myform/view.py file.
-This file contains the python functions of the estimators. 
-1. You can add your own functions in it. 
-2. Your custom estimator (functions) must be run in the "contact(request)" function at the indicated place (after 
-the following commentary: ```#After this  you can run you own estimator```. Note that if you do so, the only web site 
-will only output the restults of your own estimator. You might want to modify the if/else above or even add a choice
-bar to the web site)
+The ```bzrates/myform/view.py``` file contains the python functions of the estimators. You can add your own functions in it. 
+Your custom estimator (functions) must be run in the "contact(request)" function (after the following commentary: 
+```#After this  you can run you own estimator```. Note that if you do so, the bz-rates will only output the 
+results of your own estimator. You might want to modify the if/else above or even add a choice bar).
 The results of your estimator must be saved in a list which name must be ```res```. The first element of the list must
 be a string with the name of your estimator (e.g. 'myEstimator')
 
 ##contact.html file
-This is the html file of the web site. Find the line 126 (```<!-- HERE ADD YOUR ESTIMATOR OUTPUT, like above-->```) and 
-replace it by something like:
+The ```/bzrates/myform/templates/contact.html``` file is THE html file of the web site. Find the line 126 (```<!-- HERE ADD 
+YOUR ESTIMATOR OUTPUT, like above-->```) and replace it by something like:
   ``` 
   {% elif res.0 == "myEstimator" %}
   <form name="Form1">
@@ -42,4 +39,36 @@ replace it by something like:
   {% endif %}
   ```
 
+#Configure apache to run bzrates
+Please refer to the Django deployment Documentation for details (```https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/modwsgi/```). 
+Briefly, the estimators are written with the Python language. A common software used to make the dialogue between html and 
+Python possible is called mod_wsgi. Here is an example of an Apache2.2 config for bz-rates:
+	```
+	WSGIScriptAlias /bzrates /path/to/bzrates/mysite/wsgi.py
+	WSGIPythonPath /path/to/bzrates
+	WSGIApplicationGroup %{GLOBAL}
+
+	<Directory /path/to/bzrates/mysite>
+	    <Files wsgi.py>
+		Order deny,allow
+		Allow from all
+	    </Files>
+	</Directory>
+
+	<Directory /path/to/bzrates/myform>
+	    Order deny,allow
+	    Allow from all
+	</Directory>
+
+	Alias /static /path/to/bzrates/static/
+	<Directory /path/to/bzrates/static>
+	    Order deny,allow
+	    Allow from all
+	</Directory>
+
+	<Directory /path/to/bzrates/templates>
+	    Order deny,allow
+	    Allow from all
+	</Directory>
+	```
 
