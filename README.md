@@ -44,6 +44,7 @@ Please refer to the Django deployment Documentation for details (```https://docs
 Briefly, the estimators are written with the Python language. A common software used to make the dialogue between html and 
 Python possible is called mod_wsgi. Here is an example of an Apache2.2 config for bz-rates:
 	```
+
 	WSGIScriptAlias /bzrates /path/to/bzrates/mysite/wsgi.py
 	WSGIPythonPath /path/to/bzrates
 	WSGIApplicationGroup %{GLOBAL}
@@ -70,5 +71,6 @@ Python possible is called mod_wsgi. Here is an example of an Apache2.2 config fo
 	    Order deny,allow
 	    Allow from all
 	</Directory>
+
 	```
 
