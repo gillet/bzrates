@@ -1,23 +1,25 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-MSSator
+bz-rates
 {% endblock %}
 
 {% block abstract %}
-    <h3>Abstract</h3>
-    <p> \(bz\)-\(rates\) is a web-tool that takes into consideration the differential growth rate, <i>b</i>, and the
-        plating efficiency, <i>z</i>, to calculate mutation rates from fluctuation assays. \(bz\)-\(rates\) implements
-        two estimators: the Ma-Sandri-Sarkar maximum likelihood method and the generating function estimator. If you
-        find \(bz\)-\(rates\) useful please site our paper: "\(bz\)-\(rates\): a web-tool to accurately estimate
-        mutation rates from fluctuation assays.
+    <h3>Calculate mutation rates from fluctuation assays</h3>
+    <p> \(bz\)-\(rates\) is a web-tool that allows to take into consideration the differential growth rate, <i>b</i>
+        (even when it is not known), and the plating efficiency, <i>z</i>, to calculate mutation rates from fluctuation
+        assays. \(bz\)-\(rates\) implements two estimators: the Jaeger & Sarkar Maximum Likelihood method (1995) and the
+        Hamon & Ycart Generating Function estimator (2012).
+    </p>
+    <p>If you find \(bz\)-\(rates\) useful please site our paper: "\(bz\)-\(rates\): a web-tool to accurately estimate
+        mutation rates from fluctuation analysis".
     </p>
 {% endblock %}
 
 
 
 {% block content %}
-        <h3 style="margin-left: 15px">Estimator</h3>
+        <h3 style="margin-left: 15px">Mutation rate calculator</h3>
     <form action="" method="post">{% csrf_token %}
         <table class="inputTab">
             <tbody>
@@ -25,32 +27,59 @@ MSSator
                     <td>
                         <table class="tabButtons">
                             <tr >
-                                <td><div class="tabButtonsCell"><i><b>N<sub>0</sub></b></i> : initial number of cells in the culture</div></td>
+                                <td><div class="tabButtonsCell"><i><b>N<sub>0</sub></b></i> : initial number of cells per culture</div></td>
                             </tr>
                             <tr >
-                                <td><div class="tabButtonsCell"><i><b>z</b></i> : dilution factor or fraction of a culture plated (0 < z ≤ 1)</div></td>
+                                <td><div class="tabButtonsCell3">
+                                    <i><b>b</b></i> : Fitness of mutant / WT cells (0 < b < ∞)
+                                    <br><small>If filled: \(\mu\) is calculated with the Maximum Likelihood method </small>
+                                    <br><small>If left empty: <i>b</i> and \(\mu\) are calculated with the Generating Function</small>
+                                </div>
+                                </td>
                             </tr>
                             <tr >
-                                <td><div class="tabButtonsCell"><i><b>b</b></i> : mutant cells relative fitness (0 < b < ∞)</div></td>
+                                <td><div class="tabButtonsCell"><i><b>z</b></i> : plating efficiency or fraction of a culture plated (0 < z ≤ 1)</div></td>
                             </tr>
                             <tr >
-                                <td><div class="tabButtonsCell2"><b><i>N<sub>mutants</sub></i> | <i>N<sub>plated</sub></i></b> <br><br><i>N<sub>mutants</sub></i> : number of mutants on the plate<br>Nplated: number of cells plated</div></td>
+                                <td><div class="tabButtonsCell2">
+                                        <div class = "NmuNplatedMain">
+                                            Copy / paste your fluctuation data here<br>
+                                            in a 2-columned format: <b><i>N<sub>mutants</sub></i> | <i>N<sub>plated</sub></i></b>
+                                        </div>
+                                        <div class = "NmuNplatedSub">
+                                            <i>N<sub>mutants</sub></i> : number of mutants on the plate
+                                            <br><i>N<sub>plated</sub></i> : number of plated cells
+                                        </div>
+                                    </div></td>
                             </tr>
                         </table>
                     </td>
 
                     <td>
                         <table class="formTab">
-                            {% for field in mut_form %}
+                            <tr>
+                                <td>{{ mut_form.N0 }}</td>
+                            </tr>
+                            <tr>
+                                <td><div class="bInputForm">{{ mut_form.b }}</div></td>
+                            </tr>
+                            <tr>
+                                <td>{{ mut_form.z }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ mut_form.fluctuation }}</td>
+                            </tr>
+                            <!--{% for field in mut_form %}
                                 <tr>
                                     <td>{{ field }}</td>
                                 </tr>
-                            {% endfor %}
+                            {% endfor %}-->
                             <script type="text/javascript">
                             //<![CDATA[
 
                             function isInt(value) {
-                                return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
+                                var n = ~~Number(value);
+                                return !isNaN(value) && n >= 0 && (function(x) { return (x | 0) === x; })(parseFloat(value))
                             }
 
                                 var id_fluctuation = document.getElementById('id_fluctuation');
@@ -72,11 +101,10 @@ MSSator
                                         } else if (parseInt(elt[0]) > parseInt(elt[1])) {
                                             id_fluctuation.setCustomValidity('Error: Nmut > Nplated');
                                             return;
-                                        } else {
-                                            id_fluctuation.setCustomValidity('');
-                                            return true;
                                         }
                                     }
+                                    id_fluctuation.setCustomValidity('');
+                                    return true;
                                 };
                                 <!-- id_fluctuation.onclick = checkTextAreaValidity; -->
                                 document.getElementsByName("monBoutton").onchange = checkTextAreaValidity;
@@ -89,13 +117,13 @@ MSSator
                     <td>
                         <table class="resTab">
                             <tr>
-                                <td><div class="resTabCell3"><div class="resultsTxt">Results</div></div></td>
+                                <td><div class="resTabCell3"><div class="resultsTxt"><b>Results</b></div></div></td>
                             </tr>
                             <tr>
                                 <td><div class="resTabCell2" >
                                     {% if res != "vide" %}
                                     {% if res.0 == "Maximum Likelihood" %}
-                                    <form name="Form1">
+                                    <!--<form name="Form1"> -->
                                         <textarea readonly class="txtArea">{{ res.0 }}
 m	{{ res.1 }}
 μ	{{ res.2 }}
@@ -105,9 +133,9 @@ CLlower	{{ res.5 }}
 CLupper	{{ res.6 }}
 meanNp	{{ res.7 }}
 sdNp	{{ res.8 }}</textarea>
-                                    </form>
+                                    <!--</form>-->
                                     {% elif res.0 == "Generating Function" %}
-                                    <form name="Form1">
+
                                         <textarea readonly class="txtArea">{{ res.0 }}
 m	{{ res.1 }}
 μ	{{ res.2 }}
@@ -120,7 +148,7 @@ blower	{{ res.8 }}
 bupper	{{ res.9 }}
 meanNp	{{ res.10 }}
 sdNp	{{ res.11 }}</textarea>
-                                    </form>
+
                                     {% endif %}
                                     {% else %}
                                     <textarea readonly class="txtArea"></textarea>
@@ -132,6 +160,13 @@ sdNp	{{ res.11 }}</textarea>
             </tbody>
         </table>
     <script>
+        function eraseText() {
+            document.getElementById("id_fluctuation").value = "";
+            document.getElementById("id_N0").value = 1;
+            document.getElementById("id_b").value = '';
+            document.getElementById("id_z").value = 1;
+        }
+
         function showProgress() {
             if(checkTextAreaValidity() &&
                     document.getElementById('id_N0').checkValidity() &&
@@ -144,7 +179,7 @@ sdNp	{{ res.11 }}</textarea>
         }
     </script>
         <input type="submit" name="monBoutton" value="Run" class="runButton" onclick="showProgress()"/>
-        <input type="reset" value="Reset">
+        <input type="button" value="Reset" onclick="javascript:eraseText();">
         <div id="overlay"  style="display: none;">
             <div class="progress">
                 <img src="../../static/GIF/flower-loader-transparent.gif"/>
@@ -171,21 +206,21 @@ sdNp	{{ res.11 }}</textarea>
 
         <br>
         -->
-        <h3>Result section</h3>
-        <p>The result section outputs the following information:
+        <h3>Result description</h3>
+        <p>The "Results" box outputs the following information:
             \begin{array}{ll}
             \hline
-            \small{m} & \small{\text{mean number of mutations per culture (not corrected by the plating efficiency)}} \\
-            \small{\mu} & \small{\text{mutation rate per cell per division (not corrected by the plating efficiency)}} \\
+            \small{m} & \small{\text{mean number of mutations per culture not corrected by the plating efficiency (z)}} \\
+            \small{\mu} & \small{\text{mutation rate per cell per division not corrected by the plating efficiency (z)}} \\
             \small{m_{corr}} & \small{\text{number of mutations per culture corrected by the plating efficiency (z)}} \\
             \small{\mu_{corr}} & \small{\text{mutation rate per cell per division corrected by the plating efficiency (z)}} \\
             \small{CL_{lower}} & \small{\text{lower 95% confidence limit for } m_{corr}} \\
             \small{CL_{upper}} & \small{\text{upper 95% confidence limit for } m_{corr}} \\
-            \small{b} & \small{\text{mutant cells relative fitness predicted by the Generating Function (only if b is not provided in the input field)}} \\
-            \small{b_{lower}} & \small{\text{lower 95% confidence limit for b (only if b is not provided in the input field)}} \\
-            \small{b_{upper}} & \small{\text{upper 95% confidence limit for b (only if b is not provided in the input field)}} \\
-            \small{\overline{Np}} & \small{\text{average number of plated cells per culture (meanNp)}} \\
-            \small{\sigma_{Np}} & \small{\text{standard deviation of the number of plated cells (sdNp)}} \\
+            \small{b} & \small{\text{mutant cells relative fitness predicted by the Generating Function (only output if b is left empty in the input field)}} \\
+            \small{b_{lower}} & \small{\text{lower 95% confidence limit for b (only output if b is left empty in the input field)}} \\
+            \small{b_{upper}} & \small{\text{upper 95% confidence limit for b (only output if b is left empty in the input field)}} \\
+            \small{meanNp} & \small{\text{average number of plated cells per culture } (\overline{Np})} \\
+            \small{sdNp} & \small{\text{standard deviation of the number of plated cells } (\sigma_{Np})} \\
             \hline
             \end{array}
             <!--<ul class="ulParams">
@@ -204,42 +239,36 @@ sdNp	{{ res.11 }}</textarea>
         </p>
 
 
-    <h3>Background</h3>
+    <h3>Motivation</h3>
     <p>
         <span class="marge">A classical approach to calculate mutation rates (\(\mu\)) in microorganisms consists in performing fluctuation
-        analyses through multiple cultures grown in parallel under identical conditions (Luria1943). Each individual
+        analyses through multiple cultures grown in parallel under identical conditions (Luria & Delbrück 1943). Each individual
         culture is started with a small inoculum (\(N_{0}\)) and mutational events occur independently in each culture. At the end
         of the experiment, a \(\mu\) can be estimated from the proportions of mutant cells in the different cultures.
-        Since the seminal work of Lea and Coulson in 1949, numerous methods were proposed to calculate \(\mu\)
-        (for review see Foster2006). They all rely on the estimation of \(m\), the mean number of mutations per culture.
-        The Ma-Sandri-Sarkar (MSS) maximum likelihood function is the most accurate and versatile method because it is
-        applicable over the whole range of \(m\) (Sarkar1992). A generalization of the MSS function which takes into
-        consideration a differential growth rate between WT and mutants (\(b\neq 1\)) was proposed (Jaeger1995).
-        Note also that when the mutant fitness is unknown, the best estimator is the empirical probability
-        generating function (GF) that can estimate the value of \(b\) and calculate \(m\) nearly as precisely as the
-        MSS method (Hamon2012).</span>
+        Since the seminal work of Lea & Coulson in 1949, numerous methods were proposed to calculate \(\mu\)
+        (for review see Foster 2006). They all rely on the estimation of \(m\), the mean number of mutations per culture.
+        The Ma-Sandri-Sarkar (MSS) maximum likelihood function is often considered as the most accurate and versatile method because it is
+        applicable over the whole range of \(m\) (Sarkar & Sandri 1992). However the estimation of \(\mu\) can be strongly
+        affected by a differential growth rate between mutant and WT cells. A generalization of the MSS function which takes into
+        consideration a differential growth rate (\(b\neq 1\)) was proposed (Jaeger & Sarkar 1995) and is implemented in \(bz\)-\(rates\).
+        Note also that when the mutant relative fitness is unknown, the best estimator - also implemented in \(bz\)-\(rates\) - is
+        the empirical probability generating function (GF) that can estimate the value of \(b\) and calculate \(m\) nearly
+        as precisely as the Jaeger & Sarkar method (Hamon & Ycart 2012).</span>
     </p>
     <p>
-        <span class="marge">In addition, the estimation of \(m\) can also be affected by the fraction of the cultures
-        that is plated on selective media. This criteria is defined as the plating efficiency (\(z\)) which accounts for
-        the fact that not all mutants of the cultures are experimentally detected. Thus, plating a sub-fraction of the
-        cells can results into plates with no or very few mutants for cultures that harbored a small, but not null,
-        proportion of mutant cells. A correction was proposed by Stewart and colleagues to account for this potential
-        bias (Stewart1990).</span>
-    </p>
-    <p>
-        <span class="marge">\(bz\)-\(rates\) takes into consideration the differential growth rate, \(b\), and the plating
-        efficiency, \(z\), to calculate mutation rates from fluctuation assays. The generalized version of the MSS
-        method (Sarkar1992,Jaeger1995) is used when the user provides \(b\), otherwise, the mutation rate is calculated
-        with the GF estimator (Hamon2012). In both cases, \(\mu\) is automatically corrected for plating efficiency.</span>
+        <span class="marge">In addition, the estimation of \(m\) can also be affected by the fraction of cells
+        that is plated on selective media for each culture. This criteria is defined as the plating efficiency (\(z\)) which accounts for
+        the fact that if the entire culture is not plated, then not all the mutants will be experimentally detected.
+        A correction proposed by Stewart and colleagues to account for this potential bias (Stewart & al. 1990) is
+        also implemented in \(bz\)-\(rates\).</span>
     </p>
 
     <h3>Estimating \(m\) when \(b\) is known</h3>
-    <p> <span class="marge">\(bz\)-\(rates\) implements a generalized MSS estimators (Sarkar1992, Jaeger1995). Equation (1)
-        represents the probability function of observing \(k\) mutants. \(m\) is found by maximizing the log-likelihood
-        function (Equation (2)). In practice, \(m\) is initialized using the 0\(^{th}\)
-        term of the Poisson distribution or the Lea-Coulson estimator when cultures zero mutants are absent. Then \(m\)
-        is maximized until the likelihood function reaches a maximum.</span>
+    <p> <span class="marge">\(bz\)-\(rates\) implements the generalized MSS estimators proposed by Jaeger & Sarkar (1995).
+        In practice, \(m\) is initialized using the 0\(^{th}\) term of the Poisson distribution or the Lea-Coulson
+        estimator when all cultures have mutants. Equation (1) represents the probability function of observing \(k\)
+        mutants and \(m\) is refined by maximizing the log-likelihood function (Equation (2)).
+        </span>
 
 
         \begin{align}
@@ -250,15 +279,16 @@ sdNp	{{ res.11 }}</textarea>
         \label{ref1} \\ \nonumber \\
 
 
-        f(&k|m) = C_{0}\times ln(p_{0}) + C_{1}\times ln(p_{1}) + C_{2}\times ln(p_{2}) ... + C_{k_{max}}\times ln(p_{k_{max})}
+        f(&k|m) = C_{0}\times ln(p_{0}) + C_{1}\times ln(p_{1}) + C_{2}\times ln(p_{2}) ... + C_{k_{max}}\times ln(p_{k_{max})} \\ \nonumber \\
+        w&here\; C_{i}\text{ is the number of cultures with i mutants} \nonumber
         \end{align}
         <!-- f(&k|m) = \prod_{i=1}^{C}f(k_{i}|m) = (p_{0}^{C_0})(p_{1}^{C_1})(p_{2}^{C_2})(p_{3}^{C_3})...(p_{k_{max}}^{C_{k_{max}}}) \\-->
     </p>
 
     <p>
         <h3>Estimating \(m\) when \(b\) is unknown </h3>
-        <span class="marge"> When the mutants relative fitness is not provided by the user (i.e. the field \(b\) is left
-        empty by the user), \(bz\)-\(rates\) uses the GF from Hamon et Ycart 2012 to estimate \(m\) and \(b\). The GF
+        <span class="marge"> When the mutant relative fitness is not provided by the user (i.e. the field \(b\) is left
+        empty in the input form), \(bz\)-\(rates\) uses the GF from Hamon & Ycart 2012 to estimate \(m\) and \(b\). The GF
         uses the probability generating function to estimate the compound Poisson distribution. See Hamon & Ycart 2012
         for further details.</span>
     </p>
@@ -267,7 +297,7 @@ sdNp	{{ res.11 }}</textarea>
         <h3>Correcting for the plating efficiency \(z\)</h3>
         \(m_{corr}\) is calculated using the equation 41 from Stewart et al. 1990:
         \begin{equation}
-        m_{corr} = m \frac{1-z}{z\cdot ln(z)}
+        m_{corr} = m \frac{1-z}{z\cdot ln(z)} \nonumber
         \end{equation}
 
     </p>
@@ -276,8 +306,8 @@ sdNp	{{ res.11 }}</textarea>
         <h3>Calculating the mutation rates \(\mu\) and \(\mu_{corr}\)</h3>
         \(\mu\) and \(\mu_{corr}\) are calculated with the following formulas:
         \begin{align}
-        \mu &= \frac{m} {  \overline{Np} } \\ \nonumber \\
-        \mu_{corr} &= \frac{m_{corr}} { \overline{Np} }
+        \mu &= \frac{m} {  \overline{Np} } \nonumber \\ \nonumber \\
+        \mu_{corr} &= \frac{m_{corr}} { \overline{Np} } \nonumber
         \end{align}
 
     </p>

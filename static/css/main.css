@@ -114,6 +114,16 @@ body {
     margin: 0px;
 }
 
+.NmuNplatedMain{
+    line-height: 22px;
+    padding-top: 10px;
+}
+
+.NmuNplatedSub{
+    line-height: 20px;
+    padding-top: 40px;
+}
+
 
 .formTab {
     vertical-align: top;
@@ -164,6 +174,28 @@ body {
     border-radius: 4px;
 }
 
+.tabButtonsCell3 {
+    width: 450px;
+    height: 65px;
+    padding: 3px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+    background-color: #868686;
+    color: #ffffff;
+    vertical-align: middle;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 4px;
+    line-height: 20px;
+}
+
+.bInputForm {
+    margin-bottom: 25px;
+    margin-top: 15px;
+}
+
 .resTab{
     margin: 0px;
     padding-left: 30px;
@@ -192,20 +224,22 @@ body {
 }
 
 .resTabCell3 {
-    width: 205px;
-    height: 40px;
+    width: 198px;
+    height: 35px;
     padding: 0px;
     margin: 1px 0px 7px;
-    background-color: #868686;
+    background-color: #f4f4f4;
     color: #ffffff;
     font-size: 14px;
     text-align: center;
     border-radius: 4px;
+    border: 3px solid #000000;
 }
 
 .resultsTxt{
     margin-top: 2px;
-    padding-top: 10;
+    padding-top: 8px;
+    color: black;
 }
 
 
@@ -215,13 +249,21 @@ body {
     width: 165px;
 }
 
+.N0-select {
+    height: 40px;
+    width: 165px;
+    min: 1;
+    pattern: "\d+";
+}
+
+
 .dataFluc {
     height: 174px;
     width: 165px;
 }
 
 .txtArea{
-    height: 285px;
+    height: 315px;
     width: 205px;
     background-color: #ffffff;
 }
