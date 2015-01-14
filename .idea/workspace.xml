@@ -35,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contact.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="contact.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/myform/templates/contact.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.3157897" vertical-offset="432" max-vertical-offset="6192">
-              <caret line="44" column="57" selection-start-line="44" selection-start-column="53" selection-end-line="44" selection-end-column="57" />
+            <state vertical-scroll-proportion="0.5718608" vertical-offset="648" max-vertical-offset="6192">
+              <caret line="57" column="111" selection-start-line="57" selection-start-column="111" selection-end-line="57" selection-end-column="111" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#form#0;n#!!top" expanded="true" />
               </folding>
@@ -59,10 +59,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3067047" vertical-offset="3115" max-vertical-offset="7182">
+            <state vertical-scroll-proportion="-7.1666665" vertical-offset="3115" max-vertical-offset="7182">
               <caret line="185" column="19" selection-start-line="185" selection-start-column="19" selection-end-line="185" selection-end-column="19" />
               <folding />
             </state>
@@ -122,8 +122,8 @@
         <option value="$PROJECT_DIR$/mysite/settings.py" />
         <option value="$PROJECT_DIR$/templates/base/base.html" />
         <option value="$PROJECT_DIR$/myform/views.py" />
-        <option value="$PROJECT_DIR$/myform/templates/contact.html" />
         <option value="$PROJECT_DIR$/static/css/main.css" />
+        <option value="$PROJECT_DIR$/myform/templates/contact.html" />
       </list>
     </option>
   </component>
@@ -621,12 +621,12 @@
       <workItem from="1420198734694" duration="74876000" />
       <workItem from="1420737794290" duration="1557000" />
       <workItem from="1420801486987" duration="8022000" />
-      <workItem from="1421165193040" duration="14776000" />
+      <workItem from="1421165193040" duration="15534000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="186804000" />
+    <option name="totallyTimeSpent" value="187562000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1139,21 +1139,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myform/templates/contact.html">
+    <entry file="file://$PROJECT_DIR$/static/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.3157897" vertical-offset="432" max-vertical-offset="6192">
-          <caret line="44" column="57" selection-start-line="44" selection-start-column="53" selection-end-line="44" selection-end-column="57" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="-7.1666665" vertical-offset="3115" max-vertical-offset="7182">
+          <caret line="185" column="19" selection-start-line="185" selection-start-column="19" selection-end-line="185" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/main.css">
+    <entry file="file://$PROJECT_DIR$/myform/templates/contact.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3067047" vertical-offset="3115" max-vertical-offset="7182">
-          <caret line="185" column="19" selection-start-line="185" selection-start-column="19" selection-end-line="185" selection-end-column="19" />
-          <folding />
+        <state vertical-scroll-proportion="0.5718608" vertical-offset="648" max-vertical-offset="6192">
+          <caret line="57" column="111" selection-start-line="57" selection-start-column="111" selection-end-line="57" selection-end-column="111" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#form#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
