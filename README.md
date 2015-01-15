@@ -17,17 +17,17 @@ bz-rates paper is under submission process
 # Dependencies
 ###Scipy & Numpy
 	http://www.scipy.org/scipylib/download.html
-Debian install
+#####Debian install
 	sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas 		python-sympy python-nose
 
 ###Django 1.6.6
 	https://www.djangoproject.com/download/
-pip install
+#####pip install
 	pip install Django==1.6.6
 
 ###South (database migrations library for the Django web framework)
 	https://pypi.python.org/pypi/South or http://south.readthedocs.org/en/latest/installation.html
-pip install
+#####pip install
 	pip install South
 
 
