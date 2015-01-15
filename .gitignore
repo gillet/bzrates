@@ -1,3 +1,5 @@
 robots.txt.bkp
 *.pyc
+.idea
+.gitignore
 
