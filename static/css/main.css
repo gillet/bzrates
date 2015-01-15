@@ -202,6 +202,7 @@ body {
     padding-bottom: 0px;
 }
 
+
 .bSub{
     font-size: 12px;
 }
@@ -307,7 +308,13 @@ body {
 
 .runButton {
     margin-left: 512px;
+    width: 98px;
 }
+
+.resetButton{
+    margin-left: 15px;
+}
+
 
 .progressBar{
     margin-left: 512px;

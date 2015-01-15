@@ -55,11 +55,11 @@ bz-rates
                                 <td><div class="tabButtonsCell2">
                                         <div class = "NmuNplatedMain">
                                             Copy / paste your fluctuation data here<br>
-                                            in a 2-columned format: <b><i>N<sub>mutants</sub></i> &#60tab/space&#62 <i>N<sub>plated</sub></i></b>
+                                            in a 2-columned format: <b><i>N<sub>mutants</sub></i> [tab/space] <i>N<sub>cells</sub></i></b>
                                         </div>
                                         <div class = "NmuNplatedSub">
                                             <i>N<sub>mutants</sub></i> : number of mutants on the plate
-                                            <br><i>N<sub>plated</sub></i> : number of plated cells
+                                            <br><i>N<sub>cells</sub></i> : number of plated cells
                                         </div>
                                     </div></td>
                             </tr>
@@ -104,13 +104,13 @@ bz-rates
                                         var elt = res[i].split(/[ |\t]/);
                                         var eltLen =  elt.length;
                                         if(eltLen != 2){
-                                            id_fluctuation.setCustomValidity('Error: 2 columns (Nmut | Nplated)');
+                                            id_fluctuation.setCustomValidity('Error: 2 columns (Nmut | Ncells)');
                                             return;
                                         } else if (isInt(elt[0]) == false || isInt(elt[1]) == false) {
                                             id_fluctuation.setCustomValidity('Error: integer required');
                                             return;
                                         } else if (parseInt(elt[0]) > parseInt(elt[1])) {
-                                            id_fluctuation.setCustomValidity('Error: Nmut > Nplated');
+                                            id_fluctuation.setCustomValidity('Error: Nmut > Ncells');
                                             return;
                                         }
                                     }
@@ -139,8 +139,8 @@ mcorr	{{ res.3 }}
 μcorr	{{ res.4 }}
 CLlower	{{ res.5 }}
 CLupper	{{ res.6 }}
-meanNp	{{ res.7 }}
-sdNp	{{ res.8 }}</textarea>
+meanNc	{{ res.7 }}
+sdNc	{{ res.8 }}</textarea>
                                     <!--</form>-->
                                     {% elif res.0 == "Generating Function" %}
 
@@ -154,8 +154,8 @@ CLupper	{{ res.6 }}
 b	{{ res.7 }}
 blower	{{ res.8 }}
 bupper	{{ res.9 }}
-meanNp	{{ res.10 }}
-sdNp	{{ res.11 }}</textarea>
+meanNc	{{ res.10 }}
+sdNc	{{ res.11 }}</textarea>
 
                                     {% endif %}
                                     {% else %}
@@ -187,7 +187,7 @@ sdNp	{{ res.11 }}</textarea>
         }
     </script>
         <input type="submit" name="monBoutton" value="Run" class="runButton" onclick="showProgress()"/>
-        <input type="button" value="Reset" onclick="javascript:eraseText();">
+        <input type="button" value="Clear" class="resetButton" onclick="javascript:eraseText();">
         <div id="overlay"  style="display: none;">
             <div class="progress">
                 <img src="../../static/GIF/flower-loader-transparent.gif"/>
@@ -227,8 +227,8 @@ sdNp	{{ res.11 }}</textarea>
             \small{b} & \small{\text{mutant cells relative fitness predicted by the Generating Function (only output if b is left empty in the input field)}} \\
             \small{b_{lower}} & \small{\text{lower 95% confidence limit for b (only output if b is left empty in the input field)}} \\
             \small{b_{upper}} & \small{\text{upper 95% confidence limit for b (only output if b is left empty in the input field)}} \\
-            \small{meanNp} & \small{\text{average number of plated cells per culture } (\overline{Np})} \\
-            \small{sdNp} & \small{\text{standard deviation of the number of plated cells } (\sigma_{Np})} \\
+            \small{meanNc} & \small{\text{average number of plated cells per culture } (\overline{Nc})} \\
+            \small{sdNc} & \small{\text{standard deviation of the number of plated cells } (\sigma_{Nc})} \\
             \hline
             \end{array}
             <!--<ul class="ulParams">
@@ -314,8 +314,8 @@ sdNp	{{ res.11 }}</textarea>
         <h3>Calculating the mutation rates \(\mu\) and \(\mu_{corr}\)</h3>
         \(\mu\) and \(\mu_{corr}\) are calculated with the following formulas:
         \begin{align}
-        \mu &= \frac{m} {  \overline{Np} } \nonumber \\ \nonumber \\
-        \mu_{corr} &= \frac{m_{corr}} { \overline{Np} } \nonumber
+        \mu &= \frac{m} {  \overline{Nc} } \nonumber \\ \nonumber \\
+        \mu_{corr} &= \frac{m_{corr}} { \overline{Nt} } \nonumber
         \end{align}
 
     </p>
