@@ -38,6 +38,6 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('myform.views',
                         url(r'^$', views.contact),
-                        url(r'^tracking/', include('tracking.urls')),
+                        #url(r'^tracking/', include('tracking.urls')),
                         )
 
