@@ -54,9 +54,9 @@ class NMutField(forms.CharField):
 
 
 class MutForm(forms.Form):
-    N0 = forms.IntegerField(help_text="Initial number of cells in the culture", initial=1, label="N0", widget=forms.NumberInput(attrs={'class': 'narrow-select', 'required': "", 'min': 1}))
-    b = forms.DecimalField(help_text="Mutant fitness relatively to wild type", label="b", widget=forms.NumberInput(attrs={'class': 'narrow-select', 'min': 10e-100}), required=False)
-    z = forms.DecimalField(help_text="Plating efficiency", initial=1, label="z", widget=forms.NumberInput(attrs={'class': 'narrow-select', 'required': "", 'min': 10e-100, 'max': 1}))
+    N0 = forms.IntegerField(help_text="Initial number of cells in the culture", initial=1, label="N0", widget=forms.NumberInput(attrs={'class': 'narrow-select', 'required': ""}))
+    z = forms.DecimalField(help_text="Plating efficiency", initial=1, label="z", widget=forms.NumberInput(attrs={'class': 'narrow-select', 'required': ""}))
+    b = forms.DecimalField(help_text="Mutant fitness relatively to wild type", label="b", widget=forms.NumberInput(attrs={'class': 'narrow-select'}), required=False)
     #fluctuation = NMutField(help_text="Nmutant | Nplated cells", widget=forms.Textarea(attrs={'class': 'dataFluc', 'required': ""}), label="")
     fluctuation = forms.CharField(help_text="Nmutant | Nplated cells", widget=forms.Textarea(attrs={'class': 'dataFluc', 'required': ""}), label="")
 
@@ -275,7 +275,10 @@ def GF(Nmut, N0, Np, z):
     Mcorr = corr(m , z) / Ntmoy
 
     CL = GFConfint(Nmut)
-    CLinf, CLsup = min(CL['alpha'].values()), max(CL['alpha'].values())
+    #CLinf, CLsup = min(CL['alpha'].values()), max(CL['alpha'].values())
+    mCLinf, mCLsup = min(CL['alpha'].values()), max(CL['alpha'].values())
+    CLinf, CLsup = (mcorr-mCLinf)/Ntmoy,(mcorr+mCLsup)/Ntmoy
+
     rhoinf, rhosup = min(CL['rho'].values()), max(CL['rho'].values())
 
     return ["Generating Function", \
