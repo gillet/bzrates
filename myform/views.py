@@ -587,8 +587,12 @@ def contact(request):
             N0 = mut_form.cleaned_data['N0']
 
             fluctuation = mut_form.cleaned_data['fluctuation']
-            fluctuationList = list(chunks(re.findall(r"[\w']+", fluctuation),2))
-            f = [[int(x[0]), int(x[1])] for x in fluctuationList]
+            #fluctuationList = list(chunks(re.findall(r"[\w']+", fluctuation),2))
+            test = re.findall(r"\w\.?\w*", fluctuation)
+            fluctuationList = list(chunks(re.findall(r"[\w']+\.?[\w']*", fluctuation),2))
+            fluctuationList = list(chunks(re.findall(r"[\w]+\.?[\w]*", fluctuation),2))
+            #f = [[int(x[0]), int(float(x[1]))] for x in fluctuationList]
+            f = [[int(x[0]), int(x[1].split(".")[0])] for x in fluctuationList]
             z = float(z)
             N0 = int(N0)
             Nmut = [x[0] for x in f]

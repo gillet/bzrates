@@ -88,9 +88,15 @@ bz-rates - mutation rates calculator for fluctuation assays
                             <script type="text/javascript">
                             //<![CDATA[
 
-                            function isInt(value) {
+                            function isIntBKP(value) {
                                 var n = ~~Number(value);
                                 return !isNaN(value) && n >= 0 && (function(x) { return (x | 0) === x; })(parseFloat(value))
+                            }
+                            
+			    function isInt(value) {
+                                return !isNaN(value) &&
+                                        parseInt(Number(value)) == value &&
+                                        !isNaN(parseInt(value, 10));
                             }
 
                                 var id_fluctuation = document.getElementById('id_fluctuation');
