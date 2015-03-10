@@ -369,6 +369,45 @@ body {
     padding-right: 5px;
 }
 
+
+
+.FAQ
+{
+    width: 965px;
+    margin: 0 auto;
+    margin-top: 15px;
+    padding-left: 15px;
+    background-color: #D1D1D1;
+    border-style: solid;
+    border-color: black;
+    color: black;
+    vertical-align: middle;
+    text-align: left;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.news
+{
+    width: 965px;
+    margin: 0 auto;
+    margin-top: 15px;
+    padding-left: 15px;
+    background-color: #D1D1D1;
+    border-style: solid;
+    border-color: black;
+    color: black;
+    vertical-align: middle;
+    text-align: left;
+    font-size: 14px;
+    line-height: 40%;
+}
+
+.FAQTxt{
+    width: 940px;
+    padding-right: 5px;
+}
+
 .clr {
     clear: both;
 }

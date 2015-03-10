@@ -50,11 +50,16 @@ Contact: Alexandre Gillet-Markowska - alexandre(dot)gillet(at)yahoo(dot)fr
         <div class="clr"></div>
     </div>
 
+
     <div class="abstract">
         {% block abstract %}
         {% endblock %}
     </div>
 
+    <div class="news">
+       {% block news %}
+       {% endblock %}
+    </div>
 
 
     <div class="wrap">
@@ -68,6 +73,13 @@ Contact: Alexandre Gillet-Markowska - alexandre(dot)gillet(at)yahoo(dot)fr
     <div class="implementation">
         <div class="implementationTxt">
             {% block implementation %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="FAQ">
+        <div class="FAQTxt">
+            {% block FAQ %}
             {% endblock %}
         </div>
     </div>

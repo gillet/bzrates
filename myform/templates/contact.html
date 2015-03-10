@@ -16,6 +16,11 @@ bz-rates - mutation rates calculator for fluctuation assays
     </p>-->
 {% endblock %}
 
+{% block news %}
+    <h3>News</h3>
+    <p>2015/03/10: usage of scientific notation in the 'N0' field is now possible</p>
+    <p>2015/02/28: increased the authorized maximum number of plated cells</p>
+{% endblock %}
 
 
 {% block content %}
@@ -182,6 +187,8 @@ sdNc	{{ res.11 }}</textarea>
         }
 
         function showProgress() {
+            var Nzero = document.getElementById('id_N0').value;
+            document.getElementById('id_N0').value=Number(Nzero)
             if(checkTextAreaValidity() &&
                     document.getElementById('id_N0').checkValidity() &&
                     document.getElementById('id_z').checkValidity() &&
@@ -342,4 +349,19 @@ sdNc	{{ res.11 }}</textarea>
             <b>Stewart & al. (1990).</b> Fluctuation Analysis: The Probability Distribution of the Number Mutants Under Different Conditions. Genetics, 124(1), 175–185.</small>
         </p>
 
+{% endblock %}
+
+
+
+{% block FAQ %}
+    <h3>FAQ</h3>
+    <p class="marge">
+        Although bz-rates is built as a simplified tool to compute mutation rates, users should have
+        in mind the goods practices for fluctuation tests analysis: <i>Determining mutation rates in bacterial populations,
+        Rosche & Foster, 2000, DOI:10.1006/meth.1999.0901</i>
+        <ul><b>Is it possible to measure mutation rates when the number of cells per culture differs: No.</b> In practice,
+            bz-rate averages the number of plated cells per culture. Therefore, bz-rates will always output a result for
+            a given dataset. However, they will only be valid if the total number of cells per culture and the number of
+            plated cells per culture is identical (or at least quite close).</ul>
+    </p>
 {% endblock %}
